@@ -1,9 +1,9 @@
 import dayjs from 'dayjs'
 import * as utc from 'dayjs/plugin/utc'
 import * as timezone from 'dayjs/plugin/timezone'
-import 'dayjs/locale/pt-br'
+import 'dayjs/locale/en'
 
-dayjs.locale('pt-br')
+dayjs.locale('en')
 dayjs.extend(utc)
 dayjs.extend(timezone)
 
@@ -12,7 +12,7 @@ class DateTime {
         this.zone = dayjs.tz.guess()
     }
 
-    format(date, format = 'DD/MM/YYYY') {
+    format(date, format = 'MM/DD/YYYY') {
         return dayjs(date).format(format)
     }
 }
