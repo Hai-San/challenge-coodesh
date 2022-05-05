@@ -22,3 +22,12 @@
 		}
 	}
 }
+
+@mixin interaction_focus () {
+	@include blockInteractions {
+
+		&:focus {
+			@content;
+		}
+	}
+}
