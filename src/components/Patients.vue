@@ -43,7 +43,7 @@
                     <td>
                         <button
                             class="patientsList_buttonDetails"
-                            @click=""
+                            @click="openModal(patient)"
                         >
                             Details
                         </button>
@@ -58,47 +58,68 @@
             Load more
         </button>
     </div>
+    <PatientModalData
+        v-bind="modalData"
+        @close="modalData.show = false"
+    />
 </template>
 
-<script>
+<script setup>
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
+import PatientModalData from '@/components/PatientModalData.vue'
 
-export default {
-    setup(){
-        const searchByName = ref('')
-        const currentPage = ref(1)
-        const patientsPerPage = ref(10)
-        const store = useStore()
-        const patientsPages =  computed(() => store.state.patients.all)
+const modalData = ref({
+    show: false,
+    photo: '',
+    fullName: '',
+    email: '',
+    gender: '',
+    birth: '',
+    phone: '',
+    nat: '',
+    address: '',
+    id: null,
+    url: ''
+})
 
-        const filteredPatients = computed(() => {
-            const searchValue = searchByName.value.toLowerCase()
+const searchByName = ref('')
+const currentPage = ref(1)
+const patientsPerPage = ref(10)
+const store = useStore()
+const patientsPages =  computed(() => store.state.patients.all)
+
+const filteredPatients = computed(() => {
+    const searchValue = searchByName.value.toLowerCase()
         	return patientsPages.value.filter(patient => {
-                return patient.name.first.toLowerCase().includes(searchValue) || patient.name.last.toLowerCase().includes(searchValue)
-            })	
-        })  	
-        
+        return patient.name.first.toLowerCase().includes(searchValue) || patient.name.last.toLowerCase().includes(searchValue)
+    })	
+})          
 
-        function loadNextPage() {
-            currentPage.value++
-            loadPatients()
-        }
-
-        function loadPatients() {
-            store.dispatch('patients/fetchPatients',{ page: currentPage, perPage: patientsPerPage })
-        }
-
-        loadPatients()
-
-        return {
-            searchByName,
-            filteredPatients,
-            patientsPages,
-            loadNextPage
-        }
-    }
+function loadNextPage() {
+    currentPage.value++
+    loadPatients()
 }
+
+function loadPatients() {
+    store.dispatch('patients/fetchPatients',{ page: currentPage, perPage: patientsPerPage })
+}
+
+function openModal(patient) {
+    modalData.value.photo = patient.picture.medium
+    modalData.value.fullName = `${patient.name.first} ${patient.name.last}`
+    modalData.value.email = patient.email
+    modalData.value.gender = patient.gender
+    modalData.value.birth = patient.dob.date
+    modalData.value.phone = patient.phone
+    modalData.value.nat = patient.nat
+    modalData.value.address = `${patient.location.street.name} ${patient.location.street.number}, ${patient.location.postcode}, ${patient.location.city} - ${patient.location.state}, ${patient.location.country}`
+    modalData.value.id = patient.id
+    modalData.value.url = `${patient.id.name}-${patient.id.value}`
+    modalData.value.show = true
+}
+
+loadPatients()
 </script>
 
 <style lang="scss">

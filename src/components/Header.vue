@@ -4,15 +4,19 @@
             <a
                 class="header_logo"
                 href="/"
-                title="Pharma página inicial"
+                title="Pharma home page"
             >
                 <img
+                    aria-hidden="true"
                     class="header_logo_image"
                     :src="logo"
-                    alt="Pharma"
+                    alt="Pharma logo"
                 >
             </a>
-            <button class="header_buttonUser" />
+            <button
+                class="header_buttonUser"
+                title="Click to open user options"
+            />
         </div>
     </header>
 </template>
