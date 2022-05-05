@@ -27,12 +27,25 @@
 </template>
 
 <script setup>
+import { watch } from 'vue'
+import router from '@/router'
+
 const props = defineProps({
     show: Boolean,
-    url: {
+    id: {
         type: String,
         default: ''
     }
+})
+
+watch(() => props.id, (newId) => {
+    let id = null
+
+    if(newId) {
+        id = { id: newId }        
+    }
+
+    router.push({ query: id })    
 })
 
 const emit = defineEmits([ 'close' ])

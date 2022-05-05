@@ -1,6 +1,7 @@
 <template>
     <Teleport to="body">
         <modal
+            :id="url"
             :show="show"
             @close="$emit('close')"
         >

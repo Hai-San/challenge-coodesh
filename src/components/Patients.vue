@@ -60,13 +60,14 @@
     </div>
     <PatientModalData
         v-bind="modalData"
-        @close="modalData.show = false"
+        @close="modalData.show = false, modalData.url = ''"
     />
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
+
 import PatientModalData from '@/components/PatientModalData.vue'
 
 const modalData = ref({
@@ -87,14 +88,33 @@ const searchByName = ref('')
 const currentPage = ref(1)
 const patientsPerPage = ref(10)
 const store = useStore()
-const patientsPages =  computed(() => store.state.patients.all)
+const patientsList =  computed(() => store.state.patients.all)
 
 const filteredPatients = computed(() => {
     const searchValue = searchByName.value.toLowerCase()
-        	return patientsPages.value.filter(patient => {
+    return patientsList.value.filter(patient => {
         return patient.name.first.toLowerCase().includes(searchValue) || patient.name.last.toLowerCase().includes(searchValue)
     })	
-})          
+})  
+
+const currentPatient = computed(() => {
+    const patientId = new URLSearchParams(window.location.search).get('id')
+    let patientData = null
+
+    if(patientId) {
+        patientData =  patientsList.value.filter(patient => {
+            return patient.id.value === patientId
+        })
+
+        if(patientData) {
+            
+        }
+    }
+
+    return patientData
+
+    
+})  
 
 function loadNextPage() {
     currentPage.value++
@@ -115,11 +135,13 @@ function openModal(patient) {
     modalData.value.nat = patient.nat
     modalData.value.address = `${patient.location.street.name} ${patient.location.street.number}, ${patient.location.postcode}, ${patient.location.city} - ${patient.location.state}, ${patient.location.country}`
     modalData.value.id = patient.id
-    modalData.value.url = `${patient.id.name}-${patient.id.value}`
+    modalData.value.url = patient.id.value
     modalData.value.show = true
 }
 
 loadPatients()
+
+
 </script>
 
 <style lang="scss">
