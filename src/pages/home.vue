@@ -29,8 +29,8 @@ export default {
 	flex-direction: column;
 
 	width: 100%;
-	padding-bottom: $spacing-vh-xl;
-	margin-top: $spacing-vh-md;
+	padding-bottom: $spacing-xl-vh;
+	margin-top: $spacing-md-vh;
 }
 
 .pageHome_container {

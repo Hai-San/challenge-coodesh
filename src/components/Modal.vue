@@ -2,20 +2,23 @@
     <Transition name="modal">
         <div
             v-if="show"
-            class="modal-mask"
+            class="modal"
+            aria-modal="true"
+            role="dialog"
         >
-            <div class="modal-wrapper">
-                <div class="modal-container">
+            <div class="modal_container">
+                <div
+                    class="modal_background"
+                    @click="$emit('close')"
+                />
+                <div class="modal_box">
                     <button
-                        class="modal-default-button"
+                        class="modal_button_close"
+                        aria-label="Close modal"
                         @click="$emit('close')"
-                    >
-                        OK
-                    </button>
-                    <div class="modal-body">
-                        <slot name="body">
-                            default body
-                        </slot>
+                    />
+                    <div class="modal_content">
+                        <slot name="content" />
                     </div>
                 </div>
             </div>
@@ -25,53 +28,90 @@
 
 <script setup>
 const props = defineProps({
-    show: Boolean
+    show: Boolean,
+    url: {
+        type: String,
+        default: ''
+    }
 })
 
 const emit = defineEmits([ 'close' ])
 </script>
 
-<style>
-.modal-mask {
+<style lang="scss">
+@use '@/styles/tokens/colors.scss' as *;
+@use '@/styles/tools/interactions.scss' as *;
+@use '@/styles/tokens/speed.scss' as *;
+
+.modal {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 9998;
+	z-index: 100;
 
-	display: table;
+	overflow-y: auto;
+
+	width: 100%;
+	height: 100vh;
+}
+
+.modal_container {
+	position: relative;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 100%;
+	min-height: 100%;
+}
+
+.modal_background {
+	position: absolute;
+	top: 0;
+	left: 0;
 
 	width: 100%;
 	height: 100%;
 
-	background-color: rgba(0, 0, 0, .5);
-
-	transition: opacity .3s ease;
+	background-color: $color-low-transparent-base;
 }
 
-.modal-wrapper {
-	display: table-cell;
+.modal_box {
+	position: relative;
+	z-index: 2;
 
-	vertical-align: middle;
+	background-color: $color-high-lightest;
 }
 
-.modal-container {
-	width: 300px;
-	padding: 20px 30px;
-	margin: 0px auto;
+.modal_button_close {
+	position: absolute;
+	top: 8px;
+	right: 8px;
 
-	background-color: #fff;
-	border-radius: 2px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+	width: 20px;
+	height: 20px;
 
-	transition: all .3s ease;
+	background-color: $color-primary-darkest;
+
+	transition: background-color ease-in-out $speed-base;
+
+	cursor: pointer;
+
+	-webkit-mask: url('@assets/icons/close.svg');
+
+	mask: url('@assets/icons/close.svg');
+	mask-size: contain;
+
+	will-change: background-color;
+
+	@include interaction_full {
+		background-color: $color-primary-base;
+	}
 }
 
-.modal-body {
-	margin: 20px 0;
-}
-
-.modal-default-button {
-	float: right;
+.modal_content {
+	width: 100%;
 }
 
 .modal-enter-from,

@@ -45,7 +45,7 @@ export default {
 	justify-content: center;
 
 	width: 100%;
-	padding: $spacing-vh-xxxs 0px;
+	padding: $spacing-xxxs-vh 0px;
 
 	border-bottom: $border-width-base solid $color-primary-base; 
 }

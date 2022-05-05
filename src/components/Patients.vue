@@ -106,7 +106,7 @@ function loadPatients() {
 }
 
 function openModal(patient) {
-    modalData.value.photo = patient.picture.medium
+    modalData.value.photo = patient.picture.large
     modalData.value.fullName = `${patient.name.first} ${patient.name.last}`
     modalData.value.email = patient.email
     modalData.value.gender = patient.gender
@@ -138,7 +138,7 @@ loadPatients()
 	flex-direction: column;
 
 	width: 100%;
-	gap: $spacing-vh-md 0px;
+	gap: $spacing-md-vh 0px;
 }
 
 .patientsList_searchField{
@@ -159,7 +159,7 @@ loadPatients()
 	background-image: url('@assets/icons/search.svg');
 	background-color: $input-background-color;
 	background-size: 30px;
-	background-position: center right  $spacing-px-xxs;
+	background-position: center right  $spacing-xxs-px;
 	background-repeat: no-repeat;
 	border: 1px solid $input-border-color;
 
@@ -231,22 +231,22 @@ loadPatients()
 	}
 
 	td,th {
-		padding: $spacing-vh-sm 0px;
+		padding: $spacing-sm-vh 0px;
 
 		text-align: left;
 
 		&:first-of-type {
-			padding-left: $spacing-vh-md;
+			padding-left: $spacing-md-vh;
 		}
 
 		&:last-of-type {
-			padding-right: $spacing-vh-md;
+			padding-right: $spacing-md-vh;
 
 			text-align: right;
 		}	
 
 		&:not(:last-child) {
-			padding-right: $spacing-px-xxs;
+			padding-right: $spacing-xxs-px;
 		}
 	}
 }
@@ -255,7 +255,7 @@ loadPatients()
 	display: flex;
 	float: right;
 
-	padding: $spacing-vh-xxxs $spacing-vh-xs;
+	padding: $spacing-xxxs-vh $spacing-xs-vh;
 
 	color: $color-high-lightest;
 	background-color: $color-primary-base;
@@ -277,7 +277,7 @@ loadPatients()
 .patientsList_buttonLoadMore {
 	display: flex;
 
-	padding: $spacing-vh-xxs $spacing-vh-md;
+	padding: $spacing-xxs-vh $spacing-md-vh;
 
 	color: $color-high-lightest;
 	background-color: $color-primary-base;
