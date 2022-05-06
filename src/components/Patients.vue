@@ -157,32 +157,6 @@ if(urlParams) {
 }
 
 loadPatients()
-
-
-
-// findOpenPatient() {
-
-// }
-
-
-const currentPatient = computed(() => {
-    
-    let patientData = null
-
-    if(patientId) {
-        patientData =  patientsList.value.filter(patient => {
-            return patient.id.value === patientId
-        })
-
-        if(patientData) {
-            
-        }
-    } 
-
-    return patientData    
-})  
-
-
 </script>
 
 <style lang="scss">
