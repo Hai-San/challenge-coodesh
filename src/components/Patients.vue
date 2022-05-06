@@ -33,22 +33,24 @@
             </thead>
 
             <tbody>
-                <tr
-                    v-for="(patient, index) in filteredPatients"
-                    :key="index"
-                >
-                    <td>{{ patient.name.first }} {{ patient.name.last }}</td>
-                    <td>{{ patient.gender }}</td>
-                    <td>{{ patient.dob.date }}</td>
-                    <td>
-                        <button
-                            class="patientsList_buttonDetails"
-                            @click="openModal(patient)"
-                        >
-                            Details
-                        </button>
-                    </td>
-                </tr>
+                <template v-for="(pagePatients, pageIndex) in paginatedPatientsFiltered">
+                    <tr
+                        v-for="(patient, index) in pagePatients"
+                        :key="`${pageIndex + 1}${index}`"
+                    >
+                        <td>{{ patient.name.first }} {{ patient.name.last }}</td>
+                        <td>{{ patient.gender }}</td>
+                        <td>{{ patient.dob.date }}</td>
+                        <td>
+                            <button
+                                class="patientsList_buttonDetails"
+                                @click="openModal(patient, pageIndex + 1)"
+                            >
+                                Details
+                            </button>
+                        </td>
+                    </tr>
+                </template>
             </tbody>
         </table>
         <button
@@ -60,16 +62,21 @@
     </div>
     <PatientModalData
         v-bind="modalData"
-        @close="modalData.show = false, modalData.url = ''"
+        @close="modalData.show = false, modalData.url = {}"
     />
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useStore } from 'vuex'
-
 import PatientModalData from '@/components/PatientModalData.vue'
 
+const urlParams = new URLSearchParams(window.location.search)
+const openedPatient = {
+    id: '',
+    page: '',
+    data: {}
+}
 const modalData = ref({
     show: false,
     photo: '',
@@ -81,40 +88,41 @@ const modalData = ref({
     nat: '',
     address: '',
     id: null,
-    url: ''
+    url: {}
 })
-
 const searchByName = ref('')
 const currentPage = ref(1)
 const patientsPerPage = ref(10)
 const store = useStore()
-const patientsList =  computed(() => store.state.patients.all)
+const paginatedPatients =  computed(() => {
+    return store.state.patients.all
+})
 
-const filteredPatients = computed(() => {
+const paginatedPatientsFiltered = computed(() => {
     const searchValue = searchByName.value.toLowerCase()
-    return patientsList.value.filter(patient => {
-        return patient.name.first.toLowerCase().includes(searchValue) || patient.name.last.toLowerCase().includes(searchValue)
-    })	
-})  
-
-const currentPatient = computed(() => {
-    const patientId = new URLSearchParams(window.location.search).get('id')
-    let patientData = null
-
-    if(patientId) {
-        patientData =  patientsList.value.filter(patient => {
-            return patient.id.value === patientId
+    return paginatedPatients.value.map(page => {
+        return page.filter(patient => {
+        	return patient.name.first.toLowerCase().includes(searchValue) || patient.name.last.toLowerCase().includes(searchValue)
         })
+    })	
+}) 
 
-        if(patientData) {
-            
-        }
-    }
-
-    return patientData
-
+watch(store.state.patients.all, () => {
+    loadOpenedPatient()
     
-})  
+})
+
+function loadOpenedPatient() {
+    if (openedPatient?.page && openedPatient.page > currentPage.value) {
+        loadNextPage()
+    } else if (openedPatient.id)   {
+        openedPatient.data = paginatedPatients.value[openedPatient.page - 1].filter(patient => {
+            return patient.id.value === openedPatient.id
+        })[0]
+
+        openModal(openedPatient.data, openedPatient.page)
+    }
+}
 
 function loadNextPage() {
     currentPage.value++
@@ -125,7 +133,7 @@ function loadPatients() {
     store.dispatch('patients/fetchPatients',{ page: currentPage, perPage: patientsPerPage })
 }
 
-function openModal(patient) {
+function openModal(patient, page) {
     modalData.value.photo = patient.picture.large
     modalData.value.fullName = `${patient.name.first} ${patient.name.last}`
     modalData.value.email = patient.email
@@ -135,11 +143,43 @@ function openModal(patient) {
     modalData.value.nat = patient.nat
     modalData.value.address = `${patient.location.street.name} ${patient.location.street.number}, ${patient.location.postcode}, ${patient.location.city} - ${patient.location.state}, ${patient.location.country}`
     modalData.value.id = patient.id
-    modalData.value.url = patient.id.value
+    modalData.value.url = {
+        id: patient.id.value,
+        patientPage: page
+    }
     modalData.value.show = true
 }
 
+if(urlParams) {
+    openedPatient.id = urlParams.get('id')
+    openedPatient.page = urlParams.get('patientPage')
+}
+
 loadPatients()
+
+
+
+// findOpenPatient() {
+
+// }
+
+
+const currentPatient = computed(() => {
+    
+    let patientData = null
+
+    if(patientId) {
+        patientData =  patientsList.value.filter(patient => {
+            return patient.id.value === patientId
+        })
+
+        if(patientData) {
+            
+        }
+    } 
+
+    return patientData    
+})  
 
 
 </script>

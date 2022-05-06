@@ -32,20 +32,22 @@ import router from '@/router'
 
 const props = defineProps({
     show: Boolean,
-    id: {
-        type: String,
-        default: ''
+    urlParams: {
+        type: Object,
+        default() {
+            return {}
+        }
     }
 })
 
-watch(() => props.id, (newId) => {
-    let id = null
+watch(() => props.urlParams, (newParams) => {
+    let params = null
 
-    if(newId) {
-        id = { id: newId }        
+    if(newParams) {
+        params = newParams        
     }
 
-    router.push({ query: id })    
+    router.push({ query: params })    
 })
 
 const emit = defineEmits([ 'close' ])

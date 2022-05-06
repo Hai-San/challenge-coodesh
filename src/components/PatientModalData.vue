@@ -1,7 +1,7 @@
 <template>
     <Teleport to="body">
         <modal
-            :id="url"
+            :url-params="url"
             :show="show"
             @close="$emit('close')"
         >
@@ -87,8 +87,13 @@ const props = defineProps({
         }
     },
     url: {
-        type:String,
-        default: ''
+        type: Object,
+        default() {
+            return {
+                id: '',
+                patientPage: ''
+            }
+        }
     }
 })
 

@@ -19,7 +19,7 @@ const actions = {
 
 const mutations = {
     setPatients(state, patients) {
-        state.all.push(...patients)   
+        state.all.push(patients)   
     }
 }
 
