@@ -120,9 +120,6 @@ const modalData = reactive({
     url: {}
 })
 
-&& 
-			(filteredGender.value !== '' && patient.gender === filteredGender.value)
-
 const paginatedPatients =  computed(() => {
     return store.state.patients.all
 })
