@@ -72,13 +72,16 @@ import { useStore } from 'vuex'
 import PatientModalData from '@/components/PatientModalData.vue'
 
 const urlParams = new URLSearchParams(window.location.search)
+const searchByName = ref('')
+const currentPage = ref(1)
+const patientsPerPage = ref(10)
+const store = useStore()
 const openedPatient = reactive({
     id: '',
     page: '',
     data: null
 })
-
-const modalData = ref({
+const modalData = reactive({
     show: false,
     photo: '',
     fullName: '',
@@ -91,10 +94,7 @@ const modalData = ref({
     id: null,
     url: {}
 })
-const searchByName = ref('')
-const currentPage = ref(1)
-const patientsPerPage = ref(10)
-const store = useStore()
+
 const paginatedPatients =  computed(() => {
     return store.state.patients.all
 })
@@ -145,20 +145,20 @@ function loadPatients() {
 }
 
 function openModal(patient, page) {
-    modalData.value.photo = patient.picture.large
-    modalData.value.fullName = `${patient.name.first} ${patient.name.last}`
-    modalData.value.email = patient.email
-    modalData.value.gender = patient.gender
-    modalData.value.birth = patient.dob.date
-    modalData.value.phone = patient.phone
-    modalData.value.nat = patient.nat
-    modalData.value.address = `${patient.location.street.name} ${patient.location.street.number}, ${patient.location.postcode}, ${patient.location.city} - ${patient.location.state}, ${patient.location.country}`
-    modalData.value.id = patient.id
-    modalData.value.url = {
+    modalData.photo = patient.picture.large
+    modalData.fullName = `${patient.name.first} ${patient.name.last}`
+    modalData.email = patient.email
+    modalData.gender = patient.gender
+    modalData.birth = patient.dob.date
+    modalData.phone = patient.phone
+    modalData.nat = patient.nat
+    modalData.address = `${patient.location.street.name} ${patient.location.street.number}, ${patient.location.postcode}, ${patient.location.city} - ${patient.location.state}, ${patient.location.country}`
+    modalData.id = patient.id
+    modalData.url = {
         id: patient.id.value,
         patientPage: page
     }
-    modalData.value.show = true
+    modalData.show = true
 }
 
 loadPatients()
