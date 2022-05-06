@@ -67,16 +67,17 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, reactive } from 'vue'
 import { useStore } from 'vuex'
 import PatientModalData from '@/components/PatientModalData.vue'
 
 const urlParams = new URLSearchParams(window.location.search)
-const openedPatient = {
+const openedPatient = reactive({
     id: '',
     page: '',
-    data: {}
-}
+    data: null
+})
+
 const modalData = ref({
     show: false,
     photo: '',
@@ -113,15 +114,24 @@ watch(store.state.patients.all, () => {
     }
 })
 
+watch(openedPatient, () => {
+    if(openedPatient.data) {
+        openModal(openedPatient.data, openedPatient.page)
+    }    
+})
+
+if(urlParams) {
+    openedPatient.id = urlParams.get('id')
+    openedPatient.page = urlParams.get('patientPage')
+}
+
 function loadOpenedPatient() {
     if (openedPatient.page > currentPage.value) {
         loadNextPage()
-    } else if (openedPatient.id)   {
+    } else if (openedPatient.id)   {        
         openedPatient.data = paginatedPatients.value[openedPatient.page - 1].filter(patient => {
-            return patient.id.value === openedPatient.id
+            return patient.id.value == openedPatient.id
         })[0]
-
-        openModal(openedPatient.data, openedPatient.page)
     }
 }
 
@@ -149,11 +159,6 @@ function openModal(patient, page) {
         patientPage: page
     }
     modalData.value.show = true
-}
-
-if(urlParams) {
-    openedPatient.id = urlParams.get('id')
-    openedPatient.page = urlParams.get('patientPage')
 }
 
 loadPatients()
