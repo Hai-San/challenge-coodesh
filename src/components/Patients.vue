@@ -168,6 +168,7 @@ loadPatients()
 @use '@/styles/tools/placeholderColor.scss' as *;
 @use '@/styles/tools/interactions.scss' as *;
 @use '@/styles/utils/layout.scss';
+@use '@/styles/utils/buttons.scss';
 @use '@/styles/tokens/border.scss' as *;
 @use '@/styles/tokens/components/inputs.scss' as *;
 @use '@/styles/tokens/colors.scss' as *;
@@ -294,47 +295,11 @@ loadPatients()
 }
 
 .patientsList_buttonDetails {
-	display: flex;
+	@extend %button_small;
 	float: right;
-
-	padding: $spacing-xxxs-vh $spacing-xs-vh;
-
-	color: $color-high-lightest;
-	background-color: $color-primary-base;
-
-	font-weight: 700;
-	text-transform: uppercase;
-
-	transition: opacity ease-in-out $speed-base;
-
-	cursor: pointer;
-
-	will-change: opacity;
-
-	@include interaction_full {
-		opacity: .75;
-	}	
 }
 
 .patientsList_buttonLoadMore {
-	display: flex;
-
-	padding: $spacing-xxs-vh $spacing-md-vh;
-
-	color: $color-high-lightest;
-	background-color: $color-primary-base;
-
-	font-weight: 700;
-	text-transform: uppercase;
-
-	transition: opacity ease-in-out $speed-base;
-
-	cursor: pointer;
-
-	will-change: opacity;
-
-	@include interaction_full {
-		opacity: .75;
-	}
+	@extend %button;
 }
 </style>

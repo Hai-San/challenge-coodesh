@@ -24,6 +24,9 @@
                     <p class="patientModal_data">
                         <b>Nationality:</b>{{ nat }}
                     </p>
+                    <p class="patientModal_data"> 
+                        <b>Id:</b> {{ id.name }} - {{ id.value }}
+                    </p>
                     <p class="patientModal_data">
                         <b>Address:</b>{{ address }}
                     </p>
@@ -34,6 +37,12 @@
                     <p class="patientModal_data"> 
                         <b>Email:</b><a :href="`mailto:${email}`">{{ email }}</a>
                     </p>
+                    <button
+                        class="patientModal_urlButton js_patientModal_urlButton"
+                        :data-clipboard-text="modalUrl"
+                    >
+                        {{ urlButtonText }}
+                    </button>
                 </div>
             </template>
         </modal>
@@ -41,7 +50,28 @@
 </template>
 
 <script setup>
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import Modal from './Modal.vue'
+import ClipboardJS from 'clipboard'
+
+const route = useRoute()
+const modalUrl = ref(location.href)
+const urlButtonTextDefault = 'Copy URL'
+const urlButtonTextCopied = 'The URL was copied!'
+const urlButtonText = ref(urlButtonTextDefault)
+const clipboardUrl = new ClipboardJS('.js_patientModal_urlButton')
+
+watch(() => route.query, () => {
+    modalUrl.value = location.href
+})
+
+clipboardUrl.on('success', function (e) {
+    urlButtonText.value = urlButtonTextCopied
+    setTimeout(() => {
+        urlButtonText.value = urlButtonTextDefault
+    }, 2000)
+})
 
 const props = defineProps({
     show: Boolean,
@@ -102,9 +132,11 @@ const emit = defineEmits([ 'close' ])
 
 <style lang="scss">
 @use '@/styles/tokens/spacing.scss' as *;
+@use '@/styles/utils/buttons.scss';
 
 .patientModal {
 	display: flex;
+	align-items: flex-start;
 	justify-content: flex-start;
 	flex-direction: column;
 
@@ -137,5 +169,12 @@ const emit = defineEmits([ 'close' ])
 	b {
 		margin-right: $spacing-nano-px;
 	}
+}
+
+.patientModal_urlButton {
+	@extend %button_small;
+	align-self: center;
+
+	margin-top: $spacing-md-vh;
 }
 </style>

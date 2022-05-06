@@ -1,0 +1,39 @@
+
+@use '@/styles/tools/interactions.scss' as *;
+@use '@/styles/tokens/colors.scss' as *;
+@use '@/styles/tokens/spacing.scss' as *;
+@use '@/styles/tokens/speed.scss' as *;
+
+@mixin button_style {
+	display: flex;
+
+	color: $color-high-lightest;
+	background-color: $color-primary-base;
+
+	font-weight: 700;
+	text-transform: uppercase;
+
+	transition: opacity ease-in-out $speed-base;
+
+	cursor: pointer;
+
+	will-change: opacity;
+
+	@include interaction_full {
+		opacity: .75;
+	}	
+}
+
+@mixin button_size ($padding: $spacing-xxs-vh $spacing-md-vh) {
+	padding: $padding;
+}
+
+%button {
+	@include button_style;
+	@include button_size;
+}
+
+%button_small {
+	@include button_style;
+	@include button_size($padding: $spacing-xxxs-vh $spacing-xs-vh);
+}
