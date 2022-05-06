@@ -10,9 +10,29 @@
                 v-model="searchByName"
                 class="patientsList_searchInput"
                 type="text"
-                placeholder="Search by name"
+                placeholder="Search by name or nationality"
             >
         </div>
+
+        <label
+            class="patientsList_genderFilter"
+        >
+            Filter by Gender
+            <select
+                v-model="filteredGender"
+                class="patientsList_genderFilter_input"
+            >
+                <option value="">
+                    All
+                </option>
+                <option value="male">
+                    Male
+                </option>
+                <option value="female">
+                    Female
+                </option>
+            </select>
+        </label>
 
         <table class="patientsList_table">
             <thead>
@@ -21,10 +41,13 @@
                         Name
                     </th>
                     <th>
-                        Gender
+                        gender
                     </th>
                     <th>
                         Birth
+                    </th>
+                    <th>
+                        Nationality
                     </th>
                     <th>
                         Actions
@@ -41,6 +64,7 @@
                         <td>{{ patient.name.first }} {{ patient.name.last }}</td>
                         <td>{{ patient.gender }}</td>
                         <td>{{ patient.dob.date }}</td>
+                        <td>{{ patient.location.country }}</td>
                         <td>
                             <button
                                 class="patientsList_buttonDetails"
@@ -73,6 +97,7 @@ import PatientModalData from '@/components/PatientModalData.vue'
 
 const urlParams = new URLSearchParams(window.location.search)
 const searchByName = ref('')
+const filteredGender = ref('')
 const currentPage = ref(1)
 const patientsPerPage = ref(10)
 const store = useStore()
@@ -95,15 +120,29 @@ const modalData = reactive({
     url: {}
 })
 
+&& 
+			(filteredGender.value !== '' && patient.gender === filteredGender.value)
+
 const paginatedPatients =  computed(() => {
     return store.state.patients.all
 })
 
 const paginatedPatientsFiltered = computed(() => {
     const searchValue = searchByName.value.toLowerCase()
+
     return paginatedPatients.value.map(page => {
         return page.filter(patient => {
-        	return patient.name.first.toLowerCase().includes(searchValue) || patient.name.last.toLowerCase().includes(searchValue)
+            let filtered = true
+
+            if(filteredGender.value) {
+                filtered = patient.gender === filteredGender.value
+            }
+
+            if(filtered) {
+                filtered = patient.name.first.toLowerCase().includes(searchValue) || patient.name.last.toLowerCase().includes(searchValue) || patient.location.country.toLowerCase().includes(searchValue)
+            }
+
+            return filtered
         })
     })	
 }) 
@@ -213,6 +252,18 @@ loadPatients()
 	@include interaction_focus {
 		background-color: $input-background-color-focus;
 	}
+}
+
+.patientsList_genderFilter {
+	display: flex;
+	align-self: flex-start;
+	flex-direction: column;
+}
+
+.patientsList_genderFilter_input {
+	margin-top: $spacing-nano-px;
+
+	border: 1px solid $input-border-color;
 }
 
 .patientsList_table {
