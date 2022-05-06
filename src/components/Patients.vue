@@ -108,12 +108,13 @@ const paginatedPatientsFiltered = computed(() => {
 }) 
 
 watch(store.state.patients.all, () => {
-    loadOpenedPatient()
-    
+    if(openedPatient?.page) {
+        loadOpenedPatient()
+    }
 })
 
 function loadOpenedPatient() {
-    if (openedPatient?.page && openedPatient.page > currentPage.value) {
+    if (openedPatient.page > currentPage.value) {
         loadNextPage()
     } else if (openedPatient.id)   {
         openedPatient.data = paginatedPatients.value[openedPatient.page - 1].filter(patient => {
