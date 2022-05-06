@@ -35,6 +35,10 @@
         </label>
 
         <table class="patientsList_table">
+            <div
+                v-if="loading"
+                class="patientsList_table_loading"
+            />
             <thead>
                 <tr>
                     <th>
@@ -79,9 +83,19 @@
         </table>
         <button
             class="patientsList_buttonLoadMore"
+            :class="loading ? 'is_loading' : ''"
             @click="loadNextPage"
         >
-            Load more
+            <span class="button_text">
+                Load more
+            </span>
+            <span
+                aria-busy="true"
+                class="button_loading"
+                role="alert"
+            >
+                Loading more patients
+            </span>
         </button>
     </div>
     <PatientModalData
@@ -95,6 +109,7 @@ import { ref, computed, watch, reactive } from 'vue'
 import { useStore } from 'vuex'
 import PatientModalData from '@/components/PatientModalData.vue'
 
+const loading = ref(true)
 const urlParams = new URLSearchParams(window.location.search)
 const searchByName = ref('')
 const filteredGender = ref('')
@@ -148,6 +163,8 @@ watch(store.state.patients.all, () => {
     if(openedPatient?.page) {
         loadOpenedPatient()
     }
+
+    loading.value = false
 })
 
 watch(openedPatient, () => {
@@ -172,6 +189,7 @@ function loadOpenedPatient() {
 }
 
 function loadNextPage() {
+    loading.value = true
     currentPage.value++
     loadPatients()
 }
@@ -264,7 +282,10 @@ loadPatients()
 }
 
 .patientsList_table {
+	position: relative;
+
 	box-sizing: border-box;
+	overflow: hidden;
 
 	width: 100%;
 
@@ -339,6 +360,35 @@ loadPatients()
 		&:not(:last-child) {
 			padding-right: $spacing-xxs-px;
 		}
+	}
+}
+
+.patientsList_table_loading {
+	position: absolute;
+	z-index: 2;
+
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+
+	width: 100%;
+	height: 100%;
+	
+
+	background-color: $color-low-transparent-base;
+
+	&:after {
+		content: '';
+
+		width: 64px;
+		height: 64px;
+		margin-top: $spacing-xxxl-vh;
+
+		border: 4px solid transparent;
+		border-radius: 50%;
+		border-top-color: $color-high-lightest;
+
+		animation: rotate 1s ease infinite;
 	}
 }
 

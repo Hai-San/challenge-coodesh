@@ -1,10 +1,13 @@
 
+@use '@/styles/tools/animations.scss' as *;
 @use '@/styles/tools/interactions.scss' as *;
 @use '@/styles/tokens/colors.scss' as *;
 @use '@/styles/tokens/spacing.scss' as *;
 @use '@/styles/tokens/speed.scss' as *;
 
 @mixin button_style {
+	position: relative;
+
 	display: flex;
 
 	color: $color-high-lightest;
@@ -18,6 +21,41 @@
 	cursor: pointer;
 
 	will-change: opacity;
+
+	.button_loading {
+		position: absolute;
+
+		display: none;
+		overflow: hidden;
+
+		width: 1px;
+		height: 1px;
+	}
+
+	&.is_loading {
+
+		&:after {
+			content: '';
+
+			width: 16px;
+			height: 16px;
+			margin: auto;
+
+			border: 2px solid transparent;
+			border-radius: 50%;
+			border-top-color: $color-high-lightest;
+
+			animation: rotate 1s ease infinite;
+		}
+
+		.button_text {
+			display: none;
+		}
+
+		.button_loading {
+			display: block;
+		}
+	}
 
 	@include interaction_full {
 		opacity: .75;
