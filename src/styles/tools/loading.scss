@@ -1,0 +1,24 @@
+@use '@/styles/tools/animations.scss' as *;
+@use '@/styles/tokens/colors' as *;
+
+@mixin loading ($size: 16px, $border-width: 2px, $color:  $color-high-lightest) {
+
+	&.is_loading {
+
+		&:after {
+			content: '';
+
+			width: $size;
+			height: $size;
+			margin: auto;
+
+			border: $border-width solid transparent;
+			border-radius: 50%;
+			border-top-color: $color;
+
+			animation: rotate 1s ease infinite;
+		}
+
+		@content;
+	}
+}

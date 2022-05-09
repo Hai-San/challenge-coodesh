@@ -1,19 +1,7 @@
-import dayjs from 'dayjs'
-import * as utc from 'dayjs/plugin/utc'
-import * as timezone from 'dayjs/plugin/timezone'
-import 'dayjs/locale/pt-br'
-
-dayjs.locale('pt-br')
-dayjs.extend(utc)
-dayjs.extend(timezone)
-
 class DateTime {
-    constructor() {
-        this.zone = dayjs.tz.guess()
-    }
-
-    format(date, format = 'DD/MM/YYYY') {
-        return dayjs(date).format(format)
+    format(date) {
+        const newDate  = new Date(date)
+        return newDate.toLocaleDateString('en-US')
     }
 }
 

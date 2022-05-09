@@ -13,8 +13,6 @@
 @mixin responsiveFont (
 	$max_font: 16,
 	$min_font: 14,
-	$weight: 400,
-	$style: normal,
 	$max_width: 1920,
 	$min_width: 320
 ) {
@@ -24,8 +22,6 @@
 	$min_width: pxrem($min_width);
 
 	font-size: responsiveFont($max_font, $min_font, $max_width, $min_width);
-	font-style: $style;
-	font-weight: $weight;
 
 	@media (min-width: #{$max_width}rem) {
 		font-size: #{$max_font}rem;

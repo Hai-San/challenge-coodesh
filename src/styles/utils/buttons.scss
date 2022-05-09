@@ -1,0 +1,70 @@
+
+@use '@/styles/tools/loading.scss' as *;
+@use '@/styles/tools/interactions.scss' as *;
+@use '@/styles/tokens/components/button.scss' as *;
+@use '@/styles/tokens/speed.scss' as *;
+
+@mixin button_style (
+	$color: $button-color, 
+	$background: $button-background-color, 
+	$speed: $speed-base, 
+	$font-size: $button-font-size, 
+	$font-weight: $button-font-weight
+) {
+	position: relative;
+
+	display: flex;
+
+	color: $color;
+	background-color: $background;
+
+	font-size: $font-size;
+	font-weight: $font-weight;
+	text-transform: uppercase;
+	letter-spacing: .5px;
+
+	transition: opacity ease-in-out $speed;
+
+	cursor: pointer;
+
+	will-change: opacity;
+
+	.button_loading {
+		position: absolute;
+
+		display: none;
+		overflow: hidden;
+
+		width: 1px;
+		height: 1px;
+	}
+
+	@include loading {
+
+		.button_text {
+			display: none;
+		}
+
+		.button_loading {
+			display: block;
+		}
+	}
+
+	@include interaction_full {
+		opacity: .75;
+	}	
+}
+
+@mixin button_size ($padding: $button-padding) {
+	padding: $padding;
+}
+
+%button {
+	@include button_style;
+	@include button_size;
+}
+
+%button_small {
+	@include button_style($font-size: $button-font-size-small);
+	@include button_size($padding: $button-padding-small);
+}

@@ -1,2 +1,6 @@
+@use '@/styles/tokens/colors' as *;
+
 $border-width-base: 2px;
 $border-width-small: 1px;
+
+$border-color-primary-base: $color-primary-base;

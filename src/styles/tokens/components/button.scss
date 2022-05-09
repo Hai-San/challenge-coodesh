@@ -1,0 +1,16 @@
+@use '@/styles/tokens/colors' as *;
+@use '@/styles/tokens/spacing' as *;
+@use '@/styles/tokens/font/weight.scss' as *;
+@use '@/styles/tokens/font/size.scss' as *;
+@use '@/styles/tools/convertPxToRem.scss' as *;
+
+$button-color: $color-high-lightest;
+$button-background-color: $color-primary-base;
+
+$button-padding: $spacing-xxs-vh $spacing-md-vh;
+$button-font-weight: $font-weight-bold;
+$button-font-size: #{pxrem($font-size-xxs)}rem;
+
+//small
+$button-padding-small: $spacing-xxxs-vh $spacing-xs-vh;
+$button-font-size-small: #{pxrem($font-size-xxxs)}rem;
