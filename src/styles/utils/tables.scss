@@ -23,16 +23,6 @@
 		background-color: $color-primary-base;
 	}
 
-	tbody {
-
-		&:not(:first-of-type) {
-
-			td {
-				margin-top: -$border-width-small;
-			}
-		}
-	}
-
 	tr {
 		width: 100%;
 

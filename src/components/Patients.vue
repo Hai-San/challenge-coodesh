@@ -61,13 +61,29 @@
                 </thead>
 
                 <tbody>
-                    <template v-for="(pagePatients, pageIndex) in paginatedPatientsFiltered">
+                    <template
+                        v-for="(pagePatients, pageIndex) in paginatedPatientsFiltered"
+                        :key="pageIndex + 1"
+                    >
+                        <tr v-if="pageIndex + 1 > 1">
+                            <td colspan="5">
+                                <h2
+                            
+                                    class="patientsList_page"
+                                >
+                                    Page {{ pageIndex + 1 }}
+                                </h2>
+                            </td>
+                        </tr>
+
                         <tr
                             v-for="(patient, index) in pagePatients"
                             :id="patient.login.uuid"
                             :key="`${pageIndex + 1}${index}`"
                         >
-                            <td>{{ patient.name.first }} {{ patient.name.last }}</td>
+                            <td>
+                                {{ patient.name.first }} {{ patient.name.last }}
+                            </td>
                             <td>{{ patient.gender }}</td>
                             <td>{{ patient.dob.date }}</td>
                             <td>{{ patient.location.country }}</td>
@@ -228,6 +244,7 @@ loadPatients()
 @use '@/styles/utils/buttons.scss';
 @use '@/styles/utils/tables.scss';
 @use '@/styles/tokens/spacing.scss' as *;
+@use '@/styles/tokens/colors.scss' as *;
 
 .patientsList {
 	display: flex;
@@ -269,6 +286,17 @@ loadPatients()
 
 .patientsList_table {
 	@extend %table;
+
+	min-width: 720px;
+}
+
+.patientsList_page {
+	display: flex;
+	justify-content: flex-start;
+
+	width: 100%;
+
+	text-align: left;
 }
 
 .patientsList_table_container {
