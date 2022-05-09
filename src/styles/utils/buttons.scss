@@ -1,22 +1,21 @@
 
-@use '@/styles/tools/animations.scss' as *;
+@use '@/styles/tools/loading.scss' as *;
 @use '@/styles/tools/interactions.scss' as *;
-@use '@/styles/tokens/colors.scss' as *;
-@use '@/styles/tokens/spacing.scss' as *;
+@use '@/styles/tokens/components/button.scss' as *;
 @use '@/styles/tokens/speed.scss' as *;
 
-@mixin button_style {
+@mixin button_style ($color: $button-color, $background: $button-background-color, $speed: $speed-base) {
 	position: relative;
 
 	display: flex;
 
-	color: $color-high-lightest;
-	background-color: $color-primary-base;
+	color: $color;
+	background-color: $background;
 
 	font-weight: 700;
 	text-transform: uppercase;
 
-	transition: opacity ease-in-out $speed-base;
+	transition: opacity ease-in-out $speed;
 
 	cursor: pointer;
 
@@ -32,21 +31,7 @@
 		height: 1px;
 	}
 
-	&.is_loading {
-
-		&:after {
-			content: '';
-
-			width: 16px;
-			height: 16px;
-			margin: auto;
-
-			border: 2px solid transparent;
-			border-radius: 50%;
-			border-top-color: $color-high-lightest;
-
-			animation: rotate 1s ease infinite;
-		}
+	@include loading {
 
 		.button_text {
 			display: none;
@@ -62,7 +47,7 @@
 	}	
 }
 
-@mixin button_size ($padding: $spacing-xxs-vh $spacing-md-vh) {
+@mixin button_size ($padding: $button-padding) {
 	padding: $padding;
 }
 
@@ -73,5 +58,5 @@
 
 %button_small {
 	@include button_style;
-	@include button_size($padding: $spacing-xxxs-vh $spacing-xs-vh);
+	@include button_size($padding: $button-padding-small);
 }

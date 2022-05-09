@@ -1,10 +1,12 @@
 @use '@/styles/tokens/colors' as *;
 @use '@/styles/tokens/spacing' as *;
 
+$input-color: $color-low-darkest;
 $input-border-color: $color-primary-darkest;
 $input-background-color: $color-primary-lightest;
 $input-background-color-focus: $color-high-lightest;
 $input-placeholder-color: $color-primary-darkest;
 $input-icon-color: $color-primary-darkest;
 
-$input-padding: $spacing-xxs-vh $spacing-md-vh;
+$input-padding: $spacing-xxxs-vh $spacing-xxs-vh;
+$input-padding-big: $spacing-xxs-vh $spacing-md-vh;

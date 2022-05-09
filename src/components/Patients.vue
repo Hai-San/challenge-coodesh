@@ -37,7 +37,7 @@
         <table class="patientsList_table">
             <div
                 v-if="loading"
-                class="patientsList_table_loading"
+                class="table_loading is_loading"
             />
             <thead>
                 <tr>
@@ -220,12 +220,12 @@ loadPatients()
 </script>
 
 <style lang="scss">
-@use '@/styles/tools/placeholderColor.scss' as *;
-@use '@/styles/tools/interactions.scss' as *;
+@use '@/styles/tools/loading.scss' as *;
 @use '@/styles/utils/layout.scss';
+@use '@/styles/utils/inputs.scss';
 @use '@/styles/utils/buttons.scss';
+@use '@/styles/utils/tables.scss';
 @use '@/styles/tokens/border.scss' as *;
-@use '@/styles/tokens/components/inputs.scss' as *;
 @use '@/styles/tokens/colors.scss' as *;
 @use '@/styles/tokens/spacing.scss' as *;
 @use '@/styles/tokens/speed.scss' as *;
@@ -241,7 +241,6 @@ loadPatients()
 
 .patientsList_searchField{
 	width: 100%;
-
 }
 
 .patientsList_searchLabel {
@@ -249,25 +248,12 @@ loadPatients()
 }
 
 .patientsList_searchInput {
-	@include placeholderColor($color: $input-placeholder-color);
-
-	width: 100%;
-	padding: $input-padding;
+	@extend %input_big;
 
 	background-image: url('@assets/icons/search.svg');
-	background-color: $input-background-color;
 	background-size: 30px;
 	background-position: center right  $spacing-xxs-px;
 	background-repeat: no-repeat;
-	border: 1px solid $input-border-color;
-
-	transition: background-color ease-in-out $speed-base;
-
-	will-change: background-color;
-
-	@include interaction_focus {
-		background-color: $input-background-color-focus;
-	}
 }
 
 .patientsList_genderFilter {
@@ -277,120 +263,13 @@ loadPatients()
 }
 
 .patientsList_genderFilter_input {
-	margin-top: $spacing-nano-px;
+	@extend %select_input;
 
-	border: 1px solid $input-border-color;
+	margin-top: $spacing-nano-px;
 }
 
 .patientsList_table {
-	position: relative;
-
-	box-sizing: border-box;
-	overflow: hidden;
-
-	width: 100%;
-
-	border: 1px solid $color-primary-darkest;	
-	border-collapse: separate;
-
-	border-spacing: 0px;
-
-	thead {
-		width: 100%;
-
-		background-color: $color-primary-base;
-	}
-
-	tbody {
-
-		&:not(:first-of-type) {
-
-			td {
-				margin-top: -$border-width-small;
-			}
-		}
-	}
-
-	tr {
-		width: 100%;
-
-		box-shadow: none;
-
-		&:not(:first-child) {
-
-			td {
-				border-top: 0px;
-			}
-		}
-
-		&:last-of-type {
-
-			td {
-				border-bottom: 0px;
-			}
-		}
-	}
-
-	th {
-		color: $color-high-lightest;
-
-		text-transform: uppercase;
-	}
-
-	td {
-		color: black;
-		border-top: $border-width-small solid $color-primary-darkest;
-		border-bottom: $border-width-small solid $color-primary-darkest;
-	}
-
-	td,th {
-		padding: $spacing-sm-vh 0px;
-
-		text-align: left;
-
-		&:first-of-type {
-			padding-left: $spacing-md-vh;
-		}
-
-		&:last-of-type {
-			padding-right: $spacing-md-vh;
-
-			text-align: right;
-		}	
-
-		&:not(:last-child) {
-			padding-right: $spacing-xxs-px;
-		}
-	}
-}
-
-.patientsList_table_loading {
-	position: absolute;
-	z-index: 2;
-
-	display: flex;
-	align-items: flex-start;
-	justify-content: center;
-
-	width: 100%;
-	height: 100%;
-	
-
-	background-color: $color-low-transparent-base;
-
-	&:after {
-		content: '';
-
-		width: 64px;
-		height: 64px;
-		margin-top: $spacing-xxxl-vh;
-
-		border: 4px solid transparent;
-		border-radius: 50%;
-		border-top-color: $color-high-lightest;
-
-		animation: rotate 1s ease infinite;
-	}
+	@extend %table;
 }
 
 .patientsList_buttonDetails {

@@ -47,7 +47,7 @@ export default {
 	width: 100%;
 	padding: $spacing-xxxs-vh 0px;
 
-	border-bottom: $border-width-base solid $color-primary-base; 
+	border-bottom: $border-width-base solid $border-color-primary-base; 
 }
 
 .header_container {

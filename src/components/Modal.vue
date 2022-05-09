@@ -160,9 +160,5 @@ watch(() => props.urlParams, (newParams) => {
 .modal-enter-from,
 .modal-leave-to  {
 	opacity: 0;
-
-	.modal-container {
-		transform: scale(1.1);
-	}
 }
 </style>
