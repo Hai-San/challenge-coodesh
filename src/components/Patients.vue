@@ -66,7 +66,10 @@
                         :key="pageIndex + 1"
                     >
                         <tr v-if="pageIndex + 1 > 1">
-                            <td colspan="5">
+                            <td
+                                class="patientsList_page_col"
+                                colspan="5"
+                            >
                                 <h2
                             
                                     class="patientsList_page"
@@ -290,11 +293,17 @@ loadPatients()
 	min-width: 720px;
 }
 
+.patientsList_page_col {
+	background-color: $color-primary-base;
+}
+
 .patientsList_page {
 	display: flex;
 	justify-content: flex-start;
 
 	width: 100%;
+
+	color: $color-high-lightest;
 
 	text-align: left;
 }
