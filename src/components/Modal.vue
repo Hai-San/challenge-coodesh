@@ -45,10 +45,19 @@ watch(() => props.urlParams, (newParams) => {
     let params = null
 
     if(newParams) {
-        params = newParams        
+        params = newParams      
+
+        if(params?.id) {
+            const scrollElement = document.getElementById(params?.id)
+
+            if(scrollElement) {
+                scrollElement.scrollIntoView()
+            }
+        }
     }
 
     router.push({ query: params })    
+	
 })
 
 

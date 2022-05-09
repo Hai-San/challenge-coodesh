@@ -63,6 +63,7 @@
                 <template v-for="(pagePatients, pageIndex) in paginatedPatientsFiltered">
                     <tr
                         v-for="(patient, index) in pagePatients"
+                        :id="patient.login.uuid"
                         :key="`${pageIndex + 1}${index}`"
                     >
                         <td>{{ patient.name.first }} {{ patient.name.last }}</td>
