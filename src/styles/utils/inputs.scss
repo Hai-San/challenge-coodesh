@@ -10,7 +10,9 @@
 	$background-focus: $input-background-color-focus, 
 	$border-color: $input-border-color, 
 	$placeholder: $input-placeholder-color, 
-	$speed: $speed-base
+	$speed: $speed-base,
+	$font-size: $input-font-size,
+	$font-weight: $input-font-weight
 ) {
 	@include placeholderColor($color: $placeholder);
 	
@@ -19,6 +21,9 @@
 	color: $color;
 	background-color: $background;
 	border: 1px solid $border-color;
+
+	font-size: $font-size;
+	font-weight: $font-weight;
 	
 	transition: background-color ease-in-out $speed;
 	

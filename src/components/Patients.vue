@@ -34,54 +34,57 @@
             </select>
         </label>
 
-        <table class="patientsList_table">
-            <div
-                v-if="loading"
-                class="table_loading is_loading"
-            />
-            <thead>
-                <tr>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        gender
-                    </th>
-                    <th>
-                        Birth
-                    </th>
-                    <th>
-                        Nationality
-                    </th>
-                    <th>
-                        Actions
-                    </th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <template v-for="(pagePatients, pageIndex) in paginatedPatientsFiltered">
-                    <tr
-                        v-for="(patient, index) in pagePatients"
-                        :id="patient.login.uuid"
-                        :key="`${pageIndex + 1}${index}`"
-                    >
-                        <td>{{ patient.name.first }} {{ patient.name.last }}</td>
-                        <td>{{ patient.gender }}</td>
-                        <td>{{ patient.dob.date }}</td>
-                        <td>{{ patient.location.country }}</td>
-                        <td>
-                            <button
-                                class="patientsList_buttonDetails"
-                                @click="openModal(patient, pageIndex + 1)"
-                            >
-                                Details
-                            </button>
-                        </td>
+        <div class="patientsList_table_container">
+            <table class="patientsList_table">
+                <div
+                    v-if="loading"
+                    class="table_loading is_loading"
+                />
+                <thead>
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            gender
+                        </th>
+                        <th>
+                            Birth
+                        </th>
+                        <th>
+                            Nationality
+                        </th>
+                        <th>
+                            Actions
+                        </th>
                     </tr>
-                </template>
-            </tbody>
-        </table>
+                </thead>
+
+                <tbody>
+                    <template v-for="(pagePatients, pageIndex) in paginatedPatientsFiltered">
+                        <tr
+                            v-for="(patient, index) in pagePatients"
+                            :id="patient.login.uuid"
+                            :key="`${pageIndex + 1}${index}`"
+                        >
+                            <td>{{ patient.name.first }} {{ patient.name.last }}</td>
+                            <td>{{ patient.gender }}</td>
+                            <td>{{ patient.dob.date }}</td>
+                            <td>{{ patient.location.country }}</td>
+                            <td>
+                                <button
+                                    class="patientsList_buttonDetails"
+                                    @click="openModal(patient, pageIndex + 1)"
+                                >
+                                    Details
+                                </button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+
         <button
             class="patientsList_buttonLoadMore"
             :class="loading ? 'is_loading' : ''"
@@ -266,6 +269,10 @@ loadPatients()
 
 .patientsList_table {
 	@extend %table;
+}
+
+.patientsList_table_container {
+	@extend %table_container;
 }
 
 .patientsList_buttonDetails {

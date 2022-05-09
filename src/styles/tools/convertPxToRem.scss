@@ -1,6 +1,5 @@
 @use 'sass:math';
 
 @function pxrem ($pixels, $context: 16) {
-
 	@return math.div($pixels, $context);
 }

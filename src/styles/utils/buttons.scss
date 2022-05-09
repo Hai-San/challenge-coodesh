@@ -4,7 +4,13 @@
 @use '@/styles/tokens/components/button.scss' as *;
 @use '@/styles/tokens/speed.scss' as *;
 
-@mixin button_style ($color: $button-color, $background: $button-background-color, $speed: $speed-base) {
+@mixin button_style (
+	$color: $button-color, 
+	$background: $button-background-color, 
+	$speed: $speed-base, 
+	$font-size: $button-font-size, 
+	$font-weight: $button-font-weight
+) {
 	position: relative;
 
 	display: flex;
@@ -12,8 +18,10 @@
 	color: $color;
 	background-color: $background;
 
-	font-weight: 700;
+	font-size: $font-size;
+	font-weight: $font-weight;
 	text-transform: uppercase;
+	letter-spacing: .5px;
 
 	transition: opacity ease-in-out $speed;
 
@@ -57,6 +65,6 @@
 }
 
 %button_small {
-	@include button_style;
+	@include button_style($font-size: $button-font-size-small);
 	@include button_size($padding: $button-padding-small);
 }

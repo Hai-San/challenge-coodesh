@@ -1,6 +1,7 @@
 @use '@/styles/tokens/border.scss' as *;
 @use '@/styles/tokens/colors.scss' as *;
 @use '@/styles/tokens/spacing.scss' as *;
+@use '@/styles/utils/fonts.scss' as *;
 @use '@/styles/tools/loading.scss' as *;
 
 @mixin table () {
@@ -53,13 +54,17 @@
 	}
 
 	th {
+		@extend %font_xs_bold;
+
 		color: $color-high-lightest;
 
 		text-transform: uppercase;
 	}
 
 	td {
-		color: black;
+		@extend %font_xs_regular;
+		
+		color: $color-low-darkest;
 		border-top: $border-width-small solid $color-primary-darkest;
 		border-bottom: $border-width-small solid $color-primary-darkest;
 	}
@@ -102,4 +107,10 @@
 
 %table {
 	@include table;
+}
+
+%table_container {
+	overflow-x: auto;
+
+	width: 100%;
 }

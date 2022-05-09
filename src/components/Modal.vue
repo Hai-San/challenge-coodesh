@@ -124,6 +124,8 @@ watch(() => props.urlParams, (newParams) => {
 	position: relative;
 	z-index: 2;
 
+	max-width: 100%;
+
 	background-color: $color-high-lightest;
 }
 
