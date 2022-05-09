@@ -42,7 +42,7 @@
                     </p>
                     <button
                         class="patientModal_urlButton js_patientModal_urlButton"
-                        :data-clipboard-text="modalUrl"
+                        @click="copyToClipboard(modalUrl)"
                     >
                         {{ urlButtonText }}
                     </button>
@@ -56,26 +56,13 @@
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import Modal from './Modal.vue'
-import ClipboardJS from 'clipboard'
 
 const route = useRoute()
 const modalUrl = ref(location.href)
 const urlButtonTextDefault = 'Copy URL'
 const urlButtonTextCopied = 'The URL was copied!'
 const urlButtonText = ref(urlButtonTextDefault)
-const clipboardUrl = new ClipboardJS('.js_patientModal_urlButton')
 const emit = defineEmits([ 'close' ])
-
-watch(() => route.query, () => {
-    modalUrl.value = location.href
-})
-
-clipboardUrl.on('success', function (e) {
-    urlButtonText.value = urlButtonTextCopied
-    setTimeout(() => {
-        urlButtonText.value = urlButtonTextDefault
-    }, 2000)
-})
 
 const props = defineProps({
     show: Boolean,
@@ -131,7 +118,18 @@ const props = defineProps({
     }
 })
 
+watch(() => route.query, () => {
+    modalUrl.value = location.href
+})
 
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+	    urlButtonText.value = urlButtonTextCopied
+        setTimeout(() => {
+            urlButtonText.value = urlButtonTextDefault
+        }, 2000)	
+    })
+}
 </script>
 
 <style lang="scss">
