@@ -220,15 +220,11 @@ loadPatients()
 </script>
 
 <style lang="scss">
-@use '@/styles/tools/loading.scss' as *;
 @use '@/styles/utils/layout.scss';
 @use '@/styles/utils/inputs.scss';
 @use '@/styles/utils/buttons.scss';
 @use '@/styles/utils/tables.scss';
-@use '@/styles/tokens/border.scss' as *;
-@use '@/styles/tokens/colors.scss' as *;
 @use '@/styles/tokens/spacing.scss' as *;
-@use '@/styles/tokens/speed.scss' as *;
 
 .patientsList {
 	display: flex;
