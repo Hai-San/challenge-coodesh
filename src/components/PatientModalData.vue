@@ -24,7 +24,10 @@
                     <p class="patientModal_data">
                         <b>Nationality:</b>{{ nat }}
                     </p>
-                    <p class="patientModal_data"> 
+                    <p
+                        v-if="id.value"
+                        class="patientModal_data"
+                    > 
                         <b>Id:</b> {{ id.name }} - {{ id.value }}
                     </p>
                     <p class="patientModal_data">

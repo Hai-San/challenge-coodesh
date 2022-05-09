@@ -183,7 +183,7 @@ function loadOpenedPatient() {
         loadNextPage()
     } else if (openedPatient.id)   {        
         openedPatient.data = paginatedPatients.value[openedPatient.page - 1].filter(patient => {
-            return patient.id.value == openedPatient.id
+            return patient.login.uuid == openedPatient.id
         })[0]
     }
 }
@@ -209,7 +209,7 @@ function openModal(patient, page) {
     modalData.address = `${patient.location.street.name} ${patient.location.street.number}, ${patient.location.postcode}, ${patient.location.city} - ${patient.location.state}, ${patient.location.country}`
     modalData.id = patient.id
     modalData.url = {
-        id: patient.id.value,
+        id: patient.login.uuid,
         patientPage: page
     }
     modalData.show = true
