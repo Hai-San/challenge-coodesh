@@ -36,7 +36,7 @@ export default {
 @use '@/styles/utils/containers.scss';
 @use '@/styles/tokens/speed.scss' as *;
 @use '@/styles/tokens/spacing.scss' as *;
-@use '@/styles/tokens/border.scss' as *;
+@use '@/styles/tokens/borders.scss' as *;
 @use '@/styles/tokens/colors.scss' as *;
 @use '@/styles/tools/interactions.scss' as *;
 

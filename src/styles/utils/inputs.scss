@@ -9,6 +9,7 @@
 	$background: $input-background-color, 
 	$background-focus: $input-background-color-focus, 
 	$border-color: $input-border-color, 
+	$border-color-focus: $input-border-color-focus, 
 	$placeholder: $input-placeholder-color, 
 	$speed: $speed-base,
 	$font-size: $input-font-size,
@@ -31,6 +32,7 @@
 	
 	@include interaction_focus {
 		background-color: $background-focus;
+		border-color: $border-color-focus;
 	}
 }
 

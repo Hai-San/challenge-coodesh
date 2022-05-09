@@ -1,3 +1,4 @@
+@use '@/styles/tokens/borders' as *;
 @use '@/styles/tokens/colors' as *;
 @use '@/styles/tokens/spacing' as *;
 @use '@/styles/tokens/font/weight.scss' as *;
@@ -6,6 +7,8 @@
 
 $button-color: $color-high-lightest;
 $button-background-color: $color-primary-base;
+$button-border-color: $color-primary-base;
+$button-border-width: $border-width-small;
 
 $button-padding: $spacing-xxs-vh $spacing-md-vh;
 $button-font-weight: $font-weight-bold;

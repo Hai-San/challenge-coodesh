@@ -7,6 +7,8 @@
 @mixin button_style (
 	$color: $button-color, 
 	$background: $button-background-color, 
+	$border-width: $button-border-width, 
+	$border-color: $button-border-color, 
 	$speed: $speed-base, 
 	$font-size: $button-font-size, 
 	$font-weight: $button-font-weight
@@ -17,6 +19,7 @@
 
 	color: $color;
 	background-color: $background;
+	border: $border-width solid $border-color;
 
 	font-size: $font-size;
 	font-weight: $font-weight;
