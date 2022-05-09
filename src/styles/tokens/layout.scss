@@ -1,0 +1,17 @@
+@use '@/styles/tools/convertPxToRem.scss' as *;
+
+/******* Media queries *******/
+
+/* Configurações para desktop */
+$media-desktop-sm: '#{pxrem(1080)}rem';
+
+/* Configurações para tablet */
+$media-tablet: '#{pxrem(962)}rem';
+
+/* Configurações para mobile */
+
+$media-mobile-xl: '#{pxrem(768)}rem';
+$media-mobile-lg: '#{pxrem(640)}rem';
+$media-mobile-md: '#{pxrem(480)}rem';
+$media-mobile-sm: '#{pxrem(375)}rem';
+$media-mobile-xs: '#{pxrem(320)}rem';

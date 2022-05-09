@@ -1,0 +1,26 @@
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 700;
+
+	font-display: block;
+
+	src: url('@assets/fonts/roboto-bold.woff2') format('woff2'),
+		url('@assets/fonts/roboto-bold.woff') format('woff');
+
+}
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 400;
+
+	font-display: block;
+
+	src: url('@assets/fonts/roboto-regular.woff2') format('woff2'),
+		url('@assets/fonts/roboto-regular.woff') format('woff');
+
+}
+
+* {
+	font-family: 'Roboto', sans-serif;
+}

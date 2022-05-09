@@ -1,0 +1,13 @@
+@use 'sass:math';
+
+/*
+Para calcular VH (vertical height) dividimos o valor em pixels pela altura da tela base dividido por 100
+EX: 14px / (1080 / 100) = 1.296296296296296vh
+*/
+
+@function pxvh ($pixels) {
+	$screenHeight: math.div(768, 100);
+	$result: math.div($pixels, $screenHeight);
+
+	@return $result + vh;
+}

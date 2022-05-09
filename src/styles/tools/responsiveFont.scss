@@ -1,0 +1,37 @@
+@use 'convertPxToRem.scss' as *;
+
+@function responsiveFont ($max_font: 16, $min_font: 14, $max_width: 1920, $min_width: 320) {
+
+	$fontSize: calc(
+		#{$min_font}rem + (#{$max_font} - #{$min_font}) *
+		((100vw - #{$min_width}rem) / (#{$max_width} - #{$min_width}))
+	);
+
+	@return $fontSize;
+}
+
+@mixin responsiveFont (
+	$max_font: 16,
+	$min_font: 14,
+	$weight: 400,
+	$style: normal,
+	$max_width: 1920,
+	$min_width: 320
+) {
+	$max_font: pxrem($max_font);
+	$min_font: pxrem($min_font);
+	$max_width: pxrem($max_width);
+	$min_width: pxrem($min_width);
+
+	font-size: responsiveFont($max_font, $min_font, $max_width, $min_width);
+	font-style: $style;
+	font-weight: $weight;
+
+	@media (min-width: #{$max_width}rem) {
+		font-size: #{$max_font}rem;
+	}
+
+	@media (max-width: #{$min_width}rem) {
+		font-size: #{$min_font}rem;
+	}
+}
