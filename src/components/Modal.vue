@@ -30,6 +30,7 @@
 import { watch } from 'vue'
 import router from '@/router'
 
+const emit = defineEmits([ 'close' ])
 const props = defineProps({
     show: Boolean,
     urlParams: {
@@ -50,7 +51,7 @@ watch(() => props.urlParams, (newParams) => {
     router.push({ query: params })    
 })
 
-const emit = defineEmits([ 'close' ])
+
 </script>
 
 <style lang="scss">

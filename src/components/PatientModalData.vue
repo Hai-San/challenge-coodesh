@@ -64,6 +64,7 @@ const urlButtonTextDefault = 'Copy URL'
 const urlButtonTextCopied = 'The URL was copied!'
 const urlButtonText = ref(urlButtonTextDefault)
 const clipboardUrl = new ClipboardJS('.js_patientModal_urlButton')
+const emit = defineEmits([ 'close' ])
 
 watch(() => route.query, () => {
     modalUrl.value = location.href
@@ -130,7 +131,7 @@ const props = defineProps({
     }
 })
 
-const emit = defineEmits([ 'close' ])
+
 </script>
 
 <style lang="scss">
