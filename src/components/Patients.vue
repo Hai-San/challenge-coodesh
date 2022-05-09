@@ -65,7 +65,7 @@
                         v-for="(pagePatients, pageIndex) in paginatedPatientsFiltered"
                         :key="pageIndex + 1"
                     >
-                        <tr v-if="pageIndex + 1 > 1">
+                        <tr v-if="pageIndex + 1 > 1 && pagePatients.length > 0">
                             <td
                                 class="patientsList_page_col"
                                 colspan="5"
