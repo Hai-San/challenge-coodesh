@@ -1,7 +1,7 @@
 import axios from 'axios'
 import dateTime from '@/util/dateTime'
 
-const resquestSeed = 'pharma1d809dac6eb1a8bg'
+const resquestSeed = 'pharma1d809dac6eb1a8bh'
 
 export default {
     async getPatients(payload = { page: { value: 1 }, perPage: { value: 50 } }) {		

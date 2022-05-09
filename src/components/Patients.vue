@@ -115,7 +115,7 @@ const urlParams = new URLSearchParams(window.location.search)
 const searchByName = ref('')
 const filteredGender = ref('')
 const currentPage = ref(1)
-const patientsPerPage = ref(10)
+const patientsPerPage = ref(50)
 const store = useStore()
 const openedPatient = reactive({
     id: '',
