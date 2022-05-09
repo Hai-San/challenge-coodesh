@@ -9,13 +9,13 @@
             <div class="modal_container">
                 <div
                     class="modal_background"
-                    @click="$emit('close')"
+                    @click="close()"
                 />
                 <div class="modal_box">
                     <button
                         class="modal_button_close"
                         aria-label="Close modal"
-                        @click="$emit('close')"
+                        @click="close()"
                     />
                     <div class="modal_content">
                         <slot name="content" />
@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import { watch } from 'vue'
+import { watch, onMounted, onUnmounted } from 'vue'
 import router from '@/router'
 
 const emit = defineEmits([ 'close' ])
@@ -39,6 +39,24 @@ const props = defineProps({
             return {}
         }
     }
+})
+
+function close() {
+    emit('close')
+}
+
+function handleKeyup(event) {
+    if(event.key === 'Escape') {
+        close()
+    }
+}
+
+onMounted(() => {
+    document.addEventListener('keyup', handleKeyup)
+})
+
+onUnmounted(() => {
+    document.removeEventListener('keyup', handleKeyup)
 })
 
 watch(() => props.urlParams, (newParams) => {
