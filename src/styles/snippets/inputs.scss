@@ -1,8 +1,8 @@
 @use '@/styles/tokens/components/inputs.scss' as *;
 @use '@/styles/tokens/spacing.scss' as *;
 @use '@/styles/tokens/speed.scss' as *;
-@use '@/styles/tools/placeholderColor.scss' as *;
-@use '@/styles/tools/interactions.scss' as *;
+@use '@/styles/utils/placeholderColor.scss' as *;
+@use '@/styles/utils/interactions.scss' as *;
 
 @mixin input (
 	$color: $input-color, 

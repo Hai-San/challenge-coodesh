@@ -1,8 +1,8 @@
 @use '@/styles/tokens/borders.scss' as *;
 @use '@/styles/tokens/colors.scss' as *;
 @use '@/styles/tokens/spacing.scss' as *;
-@use '@/styles/utils/fonts.scss' as *;
-@use '@/styles/tools/loading.scss' as *;
+@use '@/styles/snippets/fonts.scss' as *;
+@use '@/styles/utils/loading.scss' as *;
 
 @mixin table () {
 	position: relative;

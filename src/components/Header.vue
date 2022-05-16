@@ -33,12 +33,12 @@ export default {
 }
 </script>
 <style lang="scss">
-@use '@/styles/utils/containers.scss';
+@use '@/styles/snippets/containers.scss';
 @use '@/styles/tokens/speed.scss' as *;
 @use '@/styles/tokens/spacing.scss' as *;
 @use '@/styles/tokens/borders.scss' as *;
 @use '@/styles/tokens/colors.scss' as *;
-@use '@/styles/tools/interactions.scss' as *;
+@use '@/styles/utils/interactions.scss' as *;
 
 .header {
 	display: flex;

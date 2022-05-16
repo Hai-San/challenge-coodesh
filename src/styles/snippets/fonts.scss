@@ -1,5 +1,5 @@
 @use '@/styles/tokens/font/size.scss' as *;
-@use '@/styles/tools/responsiveFont.scss' as *;
+@use '@/styles/utils/responsiveFont.scss' as *;
 
 %font_xs_regular {
 	@include responsiveFont($font-size-xs, $font-size-xs);

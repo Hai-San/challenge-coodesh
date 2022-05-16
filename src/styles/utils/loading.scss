@@ -1,4 +1,4 @@
-@use '@/styles/tools/animations.scss' as *;
+@use '@/styles/utils/animations.scss' as *;
 @use '@/styles/tokens/colors' as *;
 
 @mixin loading ($size: 16px, $border-width: 2px, $color:  $color-high-lightest) {

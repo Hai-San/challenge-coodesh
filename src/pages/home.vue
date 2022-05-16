@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style lang="scss">
-@use '@/styles/utils/containers.scss';
+@use '@/styles/snippets/containers.scss';
 @use '@/styles/tokens/spacing.scss' as *;
 
 .pageHome {
