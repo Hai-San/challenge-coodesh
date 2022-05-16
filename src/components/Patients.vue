@@ -242,10 +242,10 @@ loadPatients()
 </script>
 
 <style lang="scss">
-@use '@/styles/utils/layout.scss';
-@use '@/styles/utils/inputs.scss';
-@use '@/styles/utils/buttons.scss';
-@use '@/styles/utils/tables.scss';
+@use '@/styles/snippets/layout.scss';
+@use '@/styles/snippets/inputs.scss';
+@use '@/styles/snippets/buttons.scss';
+@use '@/styles/snippets/tables.scss';
 @use '@/styles/tokens/spacing.scss' as *;
 @use '@/styles/tokens/colors.scss' as *;
 

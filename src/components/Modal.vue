@@ -83,7 +83,7 @@ watch(() => props.urlParams, (newParams) => {
 
 <style lang="scss">
 @use '@/styles/tokens/colors.scss' as *;
-@use '@/styles/tools/interactions.scss' as *;
+@use '@/styles/utils/interactions.scss' as *;
 @use '@/styles/tokens/speed.scss' as *;
 
 .modal {

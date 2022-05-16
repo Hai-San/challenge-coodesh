@@ -134,7 +134,7 @@ function copyToClipboard(text) {
 
 <style lang="scss">
 @use '@/styles/tokens/spacing.scss' as *;
-@use '@/styles/utils/buttons.scss';
+@use '@/styles/snippets/buttons.scss';
 
 .patientModal {
 	display: flex;
