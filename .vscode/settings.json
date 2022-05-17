@@ -20,7 +20,7 @@
 			"source.fixAll.stylelint": true,
 			"source.fixAll.eslint": true
 		},
-		"editor.defaultFormatter": "johnsoncodehk.volar"
+		"editor.defaultFormatter": "Vue.volar"
 	},
 	"stylelint.validate": [
 		"css",
